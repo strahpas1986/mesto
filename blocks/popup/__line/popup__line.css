@@ -1,0 +1,15 @@
+.popup__line {
+  margin-bottom: 48px;
+  opacity: 0.2;
+  border: 1px solid #000000;
+}
+
+.popup__line:nth-child(2) {
+  margin-bottom: 30px;
+}
+
+@media screen and (max-width: 568px) {
+  .popup__line {
+    margin-bottom: 45px;
+  }
+}

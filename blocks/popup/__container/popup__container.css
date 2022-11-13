@@ -1,0 +1,20 @@
+.popup__container {
+  position: absolute;
+  box-sizing: border-box;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 430px;
+  min-height: 330px;
+  background-color: #fff;
+  padding: 34px 36px 37px 36px;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 568px) {
+  .popup__container {
+    width: 282px;
+    min-height: 322px;
+    padding: 25px 22px;
+  }
+}
