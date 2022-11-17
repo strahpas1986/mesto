@@ -5,6 +5,7 @@ const close = document.querySelector('.popup__close'),
       popup = document.querySelector('.popup'),
       saveClose = document.querySelector('.popup__button');
 
+
 function openPopUp() {
   popup.classList.add('popup_opened');
 }
@@ -13,22 +14,15 @@ function closePopUp() {
   popup.classList.remove('popup_opened');
 }
 
-function closeSavePopUp() {
-  popup.classList.remove('popup_opened');
-}
-
-open.addEventListener('click', openPopUp);
-close.addEventListener('click', closePopUp);
-
-// Кнопка сохранения
 
 // Находим форму в DOM
 let formElement = document.querySelector('.popup__container');
 // Находим поля формы в DOM
-let nameInput = document.querySelector('.popup__name');
-let jobInput = document.querySelector('.popup__job');
+let nameInput = document.querySelector('.popup__input_form_name');
+let jobInput = document.querySelector('.popup__input_form_job');
 let profileName = document.querySelector('.profile__name');
 let profileText = document.querySelector('.profile__text');
+
 
 
 function formSubmitHandler (evt) {
@@ -37,9 +31,12 @@ function formSubmitHandler (evt) {
     profileName.textContent = nameInput.value;
     profileText.textContent = jobInput.value;
 
-    saveClose.addEventListener('click', closeSavePopUp);
+    closePopUp();
 
 }
+
+open.addEventListener('click', openPopUp);
+close.addEventListener('click', closePopUp);
 formElement.addEventListener('submit', formSubmitHandler);
 
 

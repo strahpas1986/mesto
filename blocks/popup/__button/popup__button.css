@@ -8,11 +8,13 @@
   line-height: 22px;
   text-align: center;
   color: #FFFFFF;
+  cursor: pointer;
 }
 
 .popup__button:hover {
   opacity: .6;
   transition: .5s all;
+  border: none;
 }
 
 @media screen and (max-width: 568px) {

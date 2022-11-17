@@ -8,6 +8,7 @@
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
+  border-radius: 2px;
 }
 
 .profile__button:hover {
@@ -26,5 +27,7 @@
   .profile__button {
     width: 100%;
     margin: 36px auto 0;
+    background-size: 16px;
+
   }
 }

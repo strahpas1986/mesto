@@ -1,9 +1,11 @@
 .popup__close {
   margin: 0;
   padding: 0;
+  background-color: transparent;
+  border: none;
   position: absolute;
-  top: -61px;
-  right: -43px;
+  top: -67px;
+  right: -45px;
   font-size: 64px;
   line-height: 1.2;
   color: #fff;
