@@ -4,6 +4,7 @@
   justify-content: left;
   align-items: center;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 568px) {
