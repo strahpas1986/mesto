@@ -1,17 +1,24 @@
 .profile__info {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  padding-left: 30px;
+  padding-left: 30px; */
+  display: grid;
+  max-width: 336px;
+  grid-template-columns: 1fr 24px;
+  gap: 16px 18px;
+  align-self: center;
 
 }
 
 @media screen and (max-width: 568px) {
   .profile__info {
-    padding-top: 26px;
-    margin: 0 auto;
-
+    max-width: 189px;
+    grid-template-columns: 189px 18px;
+    gap: 4px 10px;
+    align-self: flex-start;
+    transform: translate(46px, 0);
   }
 }
