@@ -2,12 +2,12 @@
   padding-top: 40px;
   display: flex;
   flex-direction: column;
-  width: 358px;
+  width: 100%;
 }
 
 @media screen and (max-width: 568px) {
   .popup__form {
     padding-top: 75px;
-    width: 238px;
+
   }
 }

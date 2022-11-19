@@ -1,14 +1,14 @@
 .popup__close {
-  margin: 0;
-  padding: 0;
-  background-color: transparent;
-  border: none;
+  width: 32px;
+  height: 32px;
   position: absolute;
-  top: -67px;
-  right: -45px;
-  font-size: 64px;
-  line-height: 1.2;
-  color: #fff;
+  top: -40px;
+  right: -40px;
+  background-image: url('../../../images/Close_Icon.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  background-color: transparent;
   cursor: pointer;
 }
 
@@ -19,8 +19,9 @@
 
 @media screen and (max-width: 568px) {
   .popup__close {
-    top: -60px;
-    right: -5px;
-    font-size: 50px;
+    top: -36px;
+    right: 0;
+    width: 20px;
+    height: 20px;
   }
 }
