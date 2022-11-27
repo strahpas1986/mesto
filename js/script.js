@@ -87,6 +87,13 @@ const initialCards = [
 
 // функционал лайков
 
+const likeElementButton = document.querySelectorAll('.element__like');
+likeElementButton.forEach((evt) => {
+  evt.addEventListener('click', () => {
+    evt.classList.toggle('element__like_active');
+  })
+})
+
 
 open.addEventListener('click', openPopUp);
 openAddBtn.addEventListener('click', openPopupAdd);
