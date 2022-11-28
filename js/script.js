@@ -91,9 +91,24 @@ const likeElementButton = document.querySelectorAll('.element__like');
 likeElementButton.forEach((evt) => {
   evt.addEventListener('click', () => {
     evt.classList.toggle('element__like_active');
-  })
-})
+  });
+});
 
+// удаление карточки
+
+const deleteElementButton = document.querySelectorAll('.element__delete');
+
+// const deleteButtonClick = (e) => {
+//   e.target.closest('.element').remove();
+// }
+
+// deleteElementButton.addEventListener('click', deleteButtonClick);
+
+deleteElementButton.forEach((evt) => {
+  evt.addEventListener('click', (e) => {
+    e.target.closest('.element').remove();
+  });
+});
 
 open.addEventListener('click', openPopUp);
 openAddBtn.addEventListener('click', openPopupAdd);
