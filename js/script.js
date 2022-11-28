@@ -98,12 +98,6 @@ likeElementButton.forEach((evt) => {
 
 const deleteElementButton = document.querySelectorAll('.element__delete');
 
-// const deleteButtonClick = (e) => {
-//   e.target.closest('.element').remove();
-// }
-
-// deleteElementButton.addEventListener('click', deleteButtonClick);
-
 deleteElementButton.forEach((evt) => {
   evt.addEventListener('click', (e) => {
     e.target.closest('.element').remove();
