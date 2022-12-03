@@ -27,8 +27,10 @@ const initialCards = [
 const close = document.querySelectorAll('.popup__close'),
       open = document.querySelector('.profile__btn-edit'),
       openAddBtn = document.querySelector('.profile__button'),
+      openImage = document.querySelector('.element__image'),
       popup = document.querySelector('.popup'),
       popupAdd = document.querySelector('.popup_add'),
+      popupImage = document.querySelector('.popup_image'),
       saveClose = document.querySelector('.popup__button');
 
 
@@ -49,6 +51,10 @@ function openPopupAdd() {
   popupAdd.classList.add('popup_opened');
 }
 
+function openPopupImage() {
+  popupImage.classList.add('popup_opened');
+}
+
 function closePopUp() {
   if (popup.classList.contains('popup_opened')) {
     popup.classList.remove('popup_opened');
@@ -64,6 +70,14 @@ function formSubmitHandler (evt) {
     profileText.textContent = jobInput.value;
 
     closePopUp();
+}
+
+const openPopupImageFull = (e) => {
+  openPopupImage;
+  popupImage.querySelector('.popup__subtitle-img').textContent = e.target.closest('.element').querySelector('.element__subtitle').textContent;
+  const popupImageFull = popupImage.querySelector('.popup__image');
+  popupImageFull.src = e.target.closest('.element').querySelector('.element__image').src;
+  popupImageFull.alt = e.target.closest('.element').querySelector('.element__subtitle').textContent;
 }
 
 // добавление карточек
@@ -90,7 +104,7 @@ const generateElement = (item) => {
 
   const deleteButton = newElement.querySelector('.element__delete');
   deleteButton.addEventListener('click', deleteElementButton);
-
+  newElement.querySelector('.element__image').addEventListener('click', openPopupImageFull);
   return newElement;
 }
 
@@ -137,6 +151,7 @@ addElementInDisplay.addEventListener('submit', addNewElement);
 
 open.addEventListener('click', openPopUp);
 openAddBtn.addEventListener('click', openPopupAdd);
+openImage.addEventListener('click', openPopupImage);
 close.forEach(evt => evt.addEventListener('click', closePopUp));
 formElement.addEventListener('submit', formSubmitHandler);
 
