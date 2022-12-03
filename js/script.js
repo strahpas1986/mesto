@@ -60,6 +60,8 @@ function closePopUp() {
     popup.classList.remove('popup_opened');
   } else if (popupAdd.classList.contains('popup_opened')) {
     popupAdd.classList.remove('popup_opened');
+  } else if (popupImage.classList.contains('popup_opened')) {
+    popupImage.classList.remove('popup_opened');
   }
 }
 
@@ -105,6 +107,8 @@ const generateElement = (item) => {
   const deleteButton = newElement.querySelector('.element__delete');
   deleteButton.addEventListener('click', deleteElementButton);
   newElement.querySelector('.element__image').addEventListener('click', openPopupImageFull);
+  image.addEventListener('click', openPopupImage);
+  closePopUp();
   return newElement;
 }
 
@@ -151,7 +155,6 @@ addElementInDisplay.addEventListener('submit', addNewElement);
 
 open.addEventListener('click', openPopUp);
 openAddBtn.addEventListener('click', openPopupAdd);
-openImage.addEventListener('click', openPopupImage);
 close.forEach(evt => evt.addEventListener('click', closePopUp));
 formElement.addEventListener('submit', formSubmitHandler);
 
