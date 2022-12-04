@@ -40,8 +40,8 @@
 /* overlay */
 
 @import url(../blocks/popup/popup.css);
-@import url(../blocks/popup/_add/popup_add.css);
-@import url(../blocks/popup/_image/popup_image.css);
+@import url(../blocks/popup/_add-card/popup_add-card.css);
+@import url(../blocks/popup/_image-visible/popup_image-visible.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__container/_img/popup__container_img.css);
