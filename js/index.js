@@ -10,7 +10,7 @@ const openImage = document.querySelector('.element__image');
 const popupEditProfile = document.querySelector('.popup');
 const popupAddCard = document.querySelector('.popup_add-card');
 const popupImage = document.querySelector('.popup_image-visible');
-const saveClose = document.querySelector('.popup__button'); // возможно удалить
+const saveClose = document.querySelector('.popup__button');
 
 // Переменные для работы с формой
 
@@ -31,19 +31,10 @@ const elementTemplate = document.querySelector('#element-template').content.quer
 
 // Функция открытия
 
-function openPopUp(evt) {
-  evt.classList.add('popup_opened');
-  // nameInput.value = profileName.textContent;
-  // jobInput.value = profileText.textContent;
+const openPopUp = (popup) => {
+  popup.classList.add('popup_opened');
 }
-
-// function openPopupAdd() {
-//   popupAddCard.classList.add('popup_opened');
-// }
-
-// function openPopupImage() {
-//   popupImage.classList.add('popup_opened');
-// }
+// Функция закрытия
 
 function closePopUp() {
   if (popupEditProfile.classList.contains('popup_opened')) {
@@ -55,13 +46,20 @@ function closePopUp() {
   }
 }
 
+// Функция заполнения профиля
+
+const renderInput = () => {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileText.textContent;
+}
+
 const handleSubmitProfilePopup = (evt) => {
     evt.preventDefault();
 
     profileName.textContent = nameInput.value;
     profileText.textContent = jobInput.value;
 
-    closePopUp();
+    closePopUp(popupEditProfile);
 }
 
 const openPopupImageFull = (e) => {
@@ -88,8 +86,8 @@ const generateElement = (item) => {
 
   const deleteButton = newElement.querySelector('.element__delete');
   deleteButton.addEventListener('click', deleteElementButton);
-  newElement.querySelector('.element__image').addEventListener('click', openPopupImageFull);
-  image.addEventListener('click', openPopUp(popupImage));
+  image.addEventListener('click', openPopupImageFull);
+  image.addEventListener('click', () => {openPopUp(popupImage)});
   return newElement;
 }
 
@@ -123,15 +121,19 @@ const addNewElement = (evt) => {
   }
 
   renderElement(newElementDisplay);
-  closePopUp();
+  closePopUp(popupImage);
 }
-
-
 
 // слушатели событий
 
-ButtonOpenPopup.addEventListener('click', openPopUp(popupEditProfile));
-ButtonOpenAdd.addEventListener('click', openPopUp(popupAddCard));
-ButtonsClosePopup.forEach(evt => evt.addEventListener('click', closePopUp));
+ButtonOpenPopup.addEventListener('click', () => {
+  openPopUp(popupEditProfile);
+  renderInput();
+});
+ButtonOpenAdd.addEventListener('click', () => {
+  openPopUp(popupAddCard);
+});
+ButtonsClosePopup.forEach((evt) => evt.addEventListener('click', closePopUp));
+
 formElement.addEventListener('submit', handleSubmitProfilePopup);
 addElementInDisplay.addEventListener('submit', addNewElement);
