@@ -37,15 +37,7 @@ const openPopUp = (popup) => {
 // Функция закрытия
 
 const closePopUp = (popup) => {
-  // buttonsClosePopup.forEach((element) => {
-  //   element.classList.remove('popup_opened');
-  // })
-  // popup.classList.remove('popup_opened');
-  // return (event) => {
-  //   event.preventDefault();
-
-  // }
-  popup.classList.remove('popup_opened');
+    popup.classList.remove('popup_opened');
 }
 
 // Функция заполнения профиля
@@ -138,6 +130,5 @@ buttonOpenAdd.addEventListener('click', () => {
 buttonClosePopup.addEventListener('click', () => closePopUp(popupEditProfile));
 buttonClosePopupCard.addEventListener('click', () => closePopUp(popupAddCard));
 buttonClosePopupImage.addEventListener('click', () => closePopUp(popupImage));
-
 formElement.addEventListener('submit', handleSubmitProfilePopup);
 elementInDisplayAdd.addEventListener('submit', newElementAdd);
