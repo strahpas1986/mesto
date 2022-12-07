@@ -1,16 +1,16 @@
 // Переменные для кнопок открытия попапов
 
-const ButtonsClosePopup = document.querySelectorAll('.popup__close');
-const ButtonOpenPopup = document.querySelector('.profile__btn-edit');
-const ButtonOpenAdd = document.querySelector('.profile__button');
-const openImage = document.querySelector('.element__image');
+const buttonClosePopup = document.querySelector('.popup__close');
+const buttonClosePopupCard = document.querySelector('.popup__close_add-card');
+const buttonClosePopupImage = document.querySelector('.popup__close_image-visible');
+const buttonOpenPopup = document.querySelector('.profile__btn-edit');
+const buttonOpenAdd = document.querySelector('.profile__button');
 
 // Переменные для вызова попапов
 
 const popupEditProfile = document.querySelector('.popup');
 const popupAddCard = document.querySelector('.popup_add-card');
 const popupImage = document.querySelector('.popup_image-visible');
-const saveClose = document.querySelector('.popup__button');
 
 // Переменные для работы с формой
 
@@ -26,7 +26,7 @@ const elementContainer = document.querySelector('.elements');
 const elementForm = document.querySelector('.popup__form');
 const elementInputTitle = document.querySelector('.popup__input_form_title');
 const elementInputLink = document.querySelector('.popup__input_form_link');
-const addElementInDisplay = document.querySelector('#popup__form_add');
+const elementInDisplayAdd = document.querySelector('#popup__form_add');
 const elementTemplate = document.querySelector('#element-template').content.querySelector('.element');
 
 // Функция открытия
@@ -36,14 +36,16 @@ const openPopUp = (popup) => {
 }
 // Функция закрытия
 
-function closePopUp() {
-  if (popupEditProfile.classList.contains('popup_opened')) {
-    popupEditProfile.classList.remove('popup_opened');
-  } else if (popupAddCard.classList.contains('popup_opened')) {
-    popupAddCard.classList.remove('popup_opened');
-  } else if (popupImage.classList.contains('popup_opened')) {
-    popupImage.classList.remove('popup_opened');
-  }
+const closePopUp = (popup) => {
+  // buttonsClosePopup.forEach((element) => {
+  //   element.classList.remove('popup_opened');
+  // })
+  // popup.classList.remove('popup_opened');
+  // return (event) => {
+  //   event.preventDefault();
+
+  // }
+  popup.classList.remove('popup_opened');
 }
 
 // Функция заполнения профиля
@@ -113,7 +115,7 @@ initialCards.forEach((item) => {
 
 // добавить новую карточку
 
-const addNewElement = (evt) => {
+const newElementAdd = (evt) => {
   evt.preventDefault();
   const newElementDisplay = {
     name: elementInputTitle.value,
@@ -126,14 +128,16 @@ const addNewElement = (evt) => {
 
 // слушатели событий
 
-ButtonOpenPopup.addEventListener('click', () => {
+buttonOpenPopup.addEventListener('click', () => {
   openPopUp(popupEditProfile);
   renderInput();
 });
-ButtonOpenAdd.addEventListener('click', () => {
+buttonOpenAdd.addEventListener('click', () => {
   openPopUp(popupAddCard);
 });
-ButtonsClosePopup.forEach((evt) => evt.addEventListener('click', closePopUp));
+buttonClosePopup.addEventListener('click', () => closePopUp(popupEditProfile));
+buttonClosePopupCard.addEventListener('click', () => closePopUp(popupAddCard));
+buttonClosePopupImage.addEventListener('click', () => closePopUp(popupImage));
 
 formElement.addEventListener('submit', handleSubmitProfilePopup);
-addElementInDisplay.addEventListener('submit', addNewElement);
+elementInDisplayAdd.addEventListener('submit', newElementAdd);
