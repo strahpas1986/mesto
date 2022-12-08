@@ -107,7 +107,7 @@ initialCards.forEach((item) => {
 
 // добавить новую карточку
 
-const newElementAdd = (evt) => {
+const handleAddCard = (evt) => {
   evt.preventDefault();
   const newElementDisplay = {
     name: elementInputTitle.value,
@@ -115,7 +115,7 @@ const newElementAdd = (evt) => {
   }
 
   renderElement(newElementDisplay);
-  closePopUp(popupImage);
+  closePopUp(popupAddCard);
 }
 
 // слушатели событий
@@ -131,4 +131,4 @@ buttonClosePopup.addEventListener('click', () => closePopUp(popupEditProfile));
 buttonClosePopupCard.addEventListener('click', () => closePopUp(popupAddCard));
 buttonClosePopupImage.addEventListener('click', () => closePopUp(popupImage));
 formElement.addEventListener('submit', handleSubmitProfilePopup);
-elementInDisplayAdd.addEventListener('submit', newElementAdd);
+elementInDisplayAdd.addEventListener('submit', handleAddCard);
