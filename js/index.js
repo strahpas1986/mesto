@@ -8,6 +8,7 @@ const buttonOpenAdd = document.querySelector('.profile__button');
 
 // Переменные для вызова попапов
 
+const popupElements = document.querySelectorAll('.popup');
 const popupEditProfile = document.querySelector('.popup');
 const popupAddCard = document.querySelector('.popup_add-card');
 const popupImage = document.querySelector('.popup_image-visible');
@@ -33,11 +34,31 @@ const elementTemplate = document.querySelector('#element-template').content.quer
 
 const openPopUp = (popup) => {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupButtonEsc);
 }
 // Функция закрытия
 
 const closePopUp = (popup) => {
-    popup.classList.remove('popup_opened');
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupButtonEsc)
+}
+
+// Функция закрытия попапа по Esc
+
+const closePopupButtonEsc = (evt) => {
+  const popupOpen = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    closePopUp(popupOpen);
+  }
+}
+
+// Функция закрытия попапа по Overlay
+
+const closePopupButtonOverlay = (evt) => {
+  const popupOpen = document.querySelector('.popup_opened');
+  if (evt.target === evt.currentTarget) {
+    closePopUp(popupOpen);
+  }
 }
 
 // Функция заполнения профиля
@@ -127,8 +148,14 @@ buttonOpenPopup.addEventListener('click', () => {
 buttonOpenAdd.addEventListener('click', () => {
   openPopUp(popupAddCard);
 });
+
 buttonClosePopup.addEventListener('click', () => closePopUp(popupEditProfile));
 buttonClosePopupCard.addEventListener('click', () => closePopUp(popupAddCard));
 buttonClosePopupImage.addEventListener('click', () => closePopUp(popupImage));
+popupElements.forEach((element) => element.addEventListener('click', closePopupButtonOverlay));
 formElement.addEventListener('submit', handleSubmitProfilePopup);
 elementInDisplayAdd.addEventListener('submit', handleAddCard);
+
+
+
+
