@@ -40,6 +40,8 @@
 /* overlay */
 
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/__error/popup__error.css);
+@import url(../blocks/popup/__error/_active/popup__error_active.css);
 @import url(../blocks/popup/_add-card/popup_add-card.css);
 @import url(../blocks/popup/_image-visible/popup_image-visible.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
@@ -51,5 +53,8 @@
 @import url(../blocks/popup/__subtitle-img/popup__subtitle-img.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__input/popup__input.css);
+@import url(../blocks/popup/__input/_type_error.css/popup__input_type_error.css);
 @import url(../blocks/popup/__button/popup__button.css);
+@import url(../blocks/popup/__button/_disabled/popup__button_disabled.css);
+
 

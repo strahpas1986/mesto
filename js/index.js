@@ -148,7 +148,6 @@ buttonOpenPopup.addEventListener('click', () => {
 buttonOpenAdd.addEventListener('click', () => {
   openPopUp(popupAddCard);
 });
-
 buttonClosePopup.addEventListener('click', () => closePopUp(popupEditProfile));
 buttonClosePopupCard.addEventListener('click', () => closePopUp(popupAddCard));
 buttonClosePopupImage.addEventListener('click', () => closePopUp(popupImage));
@@ -157,5 +156,9 @@ formElement.addEventListener('submit', handleSubmitProfilePopup);
 elementInDisplayAdd.addEventListener('submit', handleAddCard);
 
 
+
+// сделать импорты переменных
+// при закрытии модалки приводить форму к исходному состоянию ???
+// отправить на ревью
 
 
