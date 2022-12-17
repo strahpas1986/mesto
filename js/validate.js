@@ -1,12 +1,17 @@
-
-
 const enableValidation = (object) => {
   const forms = [...document.querySelectorAll(object.formSelector)];
-  const inputs = [...document.querySelectorAll(object.inputSelector)];
 
   forms.forEach(form => {
     const inputs = [...form.querySelectorAll(object.inputSelector)];
     const button = form.querySelector(object.submitButtonSelector);
+
+    toggleSubmitButton(inputs, button, object);
+
+    form.addEventListener('reset', () => {
+      setTimeout(() => {
+        toggleSubmitButton(inputs, button, object);
+      }, 0);
+    });
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();

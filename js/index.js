@@ -1,17 +1,19 @@
 // Переменные для кнопок открытия попапов
 
-const buttonClosePopup = document.querySelector('.popup__close');
-const buttonClosePopupCard = document.querySelector('.popup__close_add-card');
-const buttonClosePopupImage = document.querySelector('.popup__close_image-visible');
-const buttonOpenPopup = document.querySelector('.profile__btn-edit');
-const buttonOpenAdd = document.querySelector('.profile__button');
+const profileCloseButton = document.querySelector('.popup__close');
+const cardCloseButton = document.querySelector('.popup__close_add-card');
+const imageCloseButton = document.querySelector('.popup__close_image-visible');
+const profileOpenButton = document.querySelector('.profile__btn-edit');
+const addOpenButton = document.querySelector('.profile__button');
 
 // Переменные для вызова попапов
 
-const popupElements = document.querySelectorAll('.popup');
-const popupEditProfile = document.querySelector('.popup');
+const profileForm = document.querySelectorAll('.popup');
+const popupEditProfile = document.querySelector('.popup_profile');
 const popupAddCard = document.querySelector('.popup_add-card');
 const popupImage = document.querySelector('.popup_image-visible');
+const popupImageFull = popupImage.querySelector('.popup__image');
+const popupSubtitleImage = popupImage.querySelector('.popup__subtitle-img');
 
 // Переменные для работы с формой
 
@@ -46,8 +48,8 @@ const closePopUp = (popup) => {
 // Функция закрытия попапа по Esc
 
 const closePopupButtonEsc = (evt) => {
-  const popupOpen = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
+    const popupOpen = document.querySelector('.popup_opened');
     closePopUp(popupOpen);
   }
 }
@@ -55,15 +57,14 @@ const closePopupButtonEsc = (evt) => {
 // Функция закрытия попапа по Overlay
 
 const closePopupButtonOverlay = (evt) => {
-  const popupOpen = document.querySelector('.popup_opened');
   if (evt.target === evt.currentTarget) {
-    closePopUp(popupOpen);
+    closePopUp(evt.currentTarget);
   }
 }
 
 // Функция заполнения профиля
 
-const renderInput = () => {
+const fillProfileInputs = () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileText.textContent;
 }
@@ -79,9 +80,8 @@ const handleSubmitProfilePopup = (evt) => {
 
 const openPopupImageFull = (e) => {
   openPopUp(popupImage);
-  parentSelector = e.target.closest('.element');
-  popupImage.querySelector('.popup__subtitle-img').textContent = parentSelector.querySelector('.element__subtitle').textContent;
-  const popupImageFull = popupImage.querySelector('.popup__image');
+  const parentSelector = e.target.closest('.element');
+  popupSubtitleImage.textContent = parentSelector.querySelector('.element__subtitle').textContent;
   popupImageFull.src = parentSelector.querySelector('.element__image').src;
   popupImageFull.alt = parentSelector.querySelector('.element__subtitle').textContent;
 }
@@ -97,24 +97,23 @@ const generateElement = (item) => {
   image.alt = item.name;
 
   const likeButton = newElement.querySelector('.element__like');
-  likeButton.addEventListener('click', likeElementButton);
+  likeButton.addEventListener('click', toggleLike);
 
   const deleteButton = newElement.querySelector('.element__delete');
-  deleteButton.addEventListener('click', deleteElementButton);
+  deleteButton.addEventListener('click', deleteElement);
   image.addEventListener('click', openPopupImageFull);
-  image.addEventListener('click', () => {openPopUp(popupImage)});
   return newElement;
 }
 
 // функционал лайков
 
-const likeElementButton = (evt) => {
+const toggleLike = (evt) => {
   evt.target.classList.toggle('element__like_active');
 }
 
 // функционал удаления карточек
 
-const deleteElementButton = (evt) => {
+const deleteElement = (evt) => {
   evt.target.closest('.element').remove();
 }
 
@@ -122,9 +121,7 @@ const renderElement = (item) => {
   elementContainer.prepend(generateElement(item));
 };
 
-initialCards.forEach((item) => {
-  renderElement(item);
-})
+initialCards.forEach(renderElement);
 
 // добавить новую карточку
 
@@ -137,28 +134,21 @@ const handleAddCard = (evt) => {
 
   renderElement(newElementDisplay);
   closePopUp(popupAddCard);
+  evt.target.reset();
 }
 
 // слушатели событий
 
-buttonOpenPopup.addEventListener('click', () => {
+profileOpenButton.addEventListener('click', () => {
   openPopUp(popupEditProfile);
-  renderInput();
+  fillProfileInputs();
 });
-buttonOpenAdd.addEventListener('click', () => {
+addOpenButton.addEventListener('click', () => {
   openPopUp(popupAddCard);
 });
-buttonClosePopup.addEventListener('click', () => closePopUp(popupEditProfile));
-buttonClosePopupCard.addEventListener('click', () => closePopUp(popupAddCard));
-buttonClosePopupImage.addEventListener('click', () => closePopUp(popupImage));
-popupElements.forEach((element) => element.addEventListener('click', closePopupButtonOverlay));
+profileCloseButton.addEventListener('click', () => closePopUp(popupEditProfile));
+cardCloseButton.addEventListener('click', () => closePopUp(popupAddCard));
+imageCloseButton.addEventListener('click', () => closePopUp(popupImage));
+profileForm.forEach((element) => element.addEventListener('click', closePopupButtonOverlay));
 formElement.addEventListener('submit', handleSubmitProfilePopup);
 elementInDisplayAdd.addEventListener('submit', handleAddCard);
-
-
-
-// сделать импорты переменных
-// при закрытии модалки приводить форму к исходному состоянию ???
-// отправить на ревью
-
-
