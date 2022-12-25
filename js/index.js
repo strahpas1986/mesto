@@ -1,14 +1,12 @@
 // Переменные для кнопок открытия попапов
 
-const profileCloseButton = document.querySelector('.popup__close');
-const cardCloseButton = document.querySelector('.popup__close_add-card');
-const imageCloseButton = document.querySelector('.popup__close_image-visible');
+const closeButton = document.querySelector('.popup__close');
 const profileOpenButton = document.querySelector('.profile__btn-edit');
 const addOpenButton = document.querySelector('.profile__button');
 
 // Переменные для вызова попапов
 
-const profileForm = document.querySelectorAll('.popup');
+const popups = document.querySelectorAll('.popup');
 const popupEditProfile = document.querySelector('.popup_profile');
 const popupAddCard = document.querySelector('.popup_add-card');
 const popupImage = document.querySelector('.popup_image-visible');
@@ -146,9 +144,18 @@ profileOpenButton.addEventListener('click', () => {
 addOpenButton.addEventListener('click', () => {
   openPopUp(popupAddCard);
 });
-profileCloseButton.addEventListener('click', () => closePopUp(popupEditProfile));
-cardCloseButton.addEventListener('click', () => closePopUp(popupAddCard));
-imageCloseButton.addEventListener('click', () => closePopUp(popupImage));
-profileForm.forEach((element) => element.addEventListener('click', closePopupButtonOverlay));
+
+
+popups.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+      if (evt.target.classList.contains('popup_opened')) {
+          closePopUp(popup);
+      }
+      if (evt.target.classList.contains('popup__close')) {
+        closePopUp(popup);
+      }
+  })
+})
+
 formElement.addEventListener('submit', handleSubmitProfilePopup);
 elementInDisplayAdd.addEventListener('submit', handleAddCard);
