@@ -1,3 +1,7 @@
+import { Card } from './card.js';
+import { initialCards } from './initialCard.js';
+
+
 // Переменные для кнопок открытия попапов
 
 const closeButton = document.querySelector('.popup__close');
@@ -9,7 +13,7 @@ const addOpenButton = document.querySelector('.profile__button');
 const popups = document.querySelectorAll('.popup');
 const popupEditProfile = document.querySelector('.popup_profile');
 const popupAddCard = document.querySelector('.popup_add-card');
-const popupImage = document.querySelector('.popup_image-visible');
+export const popupImage = document.querySelector('.popup_image-visible');
 const popupImageFull = popupImage.querySelector('.popup__image');
 const popupSubtitleImage = popupImage.querySelector('.popup__subtitle-img');
 
@@ -32,7 +36,7 @@ const elementTemplate = document.querySelector('#element-template').content.quer
 
 // Функция открытия
 
-const openPopUp = (popup) => {
+export const openPopUp = (popup) => {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupButtonEsc);
 }
@@ -76,50 +80,12 @@ const handleSubmitProfilePopup = (evt) => {
     closePopUp(popupEditProfile);
 }
 
-const openPopupImageFull = (e) => {
-  openPopUp(popupImage);
-  const parentSelector = e.target.closest('.element');
-  popupSubtitleImage.textContent = parentSelector.querySelector('.element__subtitle').textContent;
-  popupImageFull.src = parentSelector.querySelector('.element__image').src;
-  popupImageFull.alt = parentSelector.querySelector('.element__subtitle').textContent;
-}
 
-// клонирование карточек
-
-const generateElement = (item) => {
-  const newElement = elementTemplate.cloneNode(true);
-  const title = newElement.querySelector('.element__subtitle');
-  title.textContent = item.name;
-  const image = newElement.querySelector('.element__image');
-  image.src = item.link;
-  image.alt = item.name;
-
-  const likeButton = newElement.querySelector('.element__like');
-  likeButton.addEventListener('click', toggleLike);
-
-  const deleteButton = newElement.querySelector('.element__delete');
-  deleteButton.addEventListener('click', deleteElement);
-  image.addEventListener('click', openPopupImageFull);
-  return newElement;
-}
-
-// функционал лайков
-
-const toggleLike = (evt) => {
-  evt.target.classList.toggle('element__like_active');
-}
-
-// функционал удаления карточек
-
-const deleteElement = (evt) => {
-  evt.target.closest('.element').remove();
-}
-
-const renderElement = (item) => {
-  elementContainer.prepend(generateElement(item));
-};
-
-initialCards.forEach(renderElement);
+initialCards.forEach((item) => {
+  const element = new Card(item.name, item.link, '#element-template');
+  const elementContainer = element.generateElement();
+  document.querySelector('.elements').append(elementContainer);
+});
 
 // добавить новую карточку
 
@@ -130,7 +96,13 @@ const handleAddCard = (evt) => {
     link: elementInputLink.value
   }
 
-  renderElement(newElementDisplay);
+  // renderElement(newElementDisplay);
+  // closePopUp(popupAddCard);
+  // evt.target.reset();
+
+  const element = new Card (newElementDisplay.name, newElementDisplay.link, '#element-template');
+  const cardElement = element.generateElement();
+  elementContainer.prepend(cardElement);
   closePopUp(popupAddCard);
   evt.target.reset();
 }
