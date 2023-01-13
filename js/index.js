@@ -1,6 +1,5 @@
 import { Card } from './card.js';
-import { initialCards } from './initialCard.js';
-
+import { initialCards, settings } from './constants.js';
 
 // Переменные для кнопок открытия попапов
 
@@ -40,6 +39,7 @@ export const openPopUp = (popup) => {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupButtonEsc);
 }
+
 // Функция закрытия
 
 const closePopUp = (popup) => {
@@ -80,7 +80,6 @@ const handleSubmitProfilePopup = (evt) => {
     closePopUp(popupEditProfile);
 }
 
-
 initialCards.forEach((item) => {
   const element = new Card(item.name, item.link, '#element-template');
   const elementContainer = element.generateElement();
@@ -96,16 +95,19 @@ const handleAddCard = (evt) => {
     link: elementInputLink.value
   }
 
-  // renderElement(newElementDisplay);
-  // closePopUp(popupAddCard);
-  // evt.target.reset();
-
   const element = new Card (newElementDisplay.name, newElementDisplay.link, '#element-template');
   const cardElement = element.generateElement();
   elementContainer.prepend(cardElement);
   closePopUp(popupAddCard);
   evt.target.reset();
 }
+
+// валидация через класс
+
+const popupProfileValidation = new FormValidator(settings, popupEditProfile);
+const popupAddCardValidation = new FormValidator(settings, popupAddCard);
+popupProfileValidation.enableValidation();
+popupAddCardValidation.enableValidation();
 
 // слушатели событий
 
@@ -117,6 +119,7 @@ addOpenButton.addEventListener('click', () => {
   openPopUp(popupAddCard);
 });
 
+// Закрытие попапов
 
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
