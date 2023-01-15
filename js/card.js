@@ -40,17 +40,11 @@ export class Card {
     this._element.querySelector('.element__delete').closest('.element').remove();
   }
 
-  // // рендеринг элементов
-
-  // _renderElement(item) {
-  //   elementContainer.prepend(generateElement(item));
-  // };
-
-  _openPopupImageFull() {
-    openPopUp(popupImage);
-    popupImage.querySelector('.element__subtitle').textContent = this._name;
-    popupImage.querySelector('.element__image').src = this._link;
-    popupImage.querySelector('.element__image').alt = this._name;
+   _openPopupImageFull() {
+      openPopUp(popupImage);
+      popupImage.querySelector('.element__subtitle').textContent = this._name;
+      popupImage.querySelector('.element__image').src = this._link;
+      popupImage.querySelector('.element__image').alt = this._name;
   }
 
   _setEventListeners() {
