@@ -1,6 +1,5 @@
 class FormValidator {
   constructor (settings, formElement) {
-    this._formSelector = settings.formSelector;
     this._inputSelector = settings.inputSelector;
     this._submitButtonSelector = settings.submitButtonSelector;
     this._inactivateButtonClass = settings.inactivateButtonClass;
@@ -9,27 +8,36 @@ class FormValidator {
     this._form = formElement;
   }
 
-  _toggleSubmitButton(inputsList, submitButton) {
-    const isFormValid = inputsList.every(input => input.validity.valid);
+  _toggleSubmitButton() {
+    const isFormValid = this._inputsList.every(input => input.validity.valid);
     if (isFormValid) {
-      submitButton.classList.remove(this._inactiveButtonClass);
-      submitButton.disabled = '';
+      this.submitButton.classList.remove(this._inactiveButtonClass);
+      this.submitButton.disabled = '';
     } else {
-      submitButton.classList.add(this._inactiveButtonClass);
-      submitButton.disabled = 'disabled';
+      this.submitButton.classList.add(this._inactiveButtonClass);
+      this.submitButton.disabled = 'disabled';
     }
   }
 
-  _checkInputValidity(input) {
+  _removeInputError(input) {
     const error = this._form.querySelector(`#${input.id}-error`);
+    input.classList.remove(this._inputErrorClass);
+    error.textContent = '';
+  }
+
+  _addInputError(input) {
+    const error = this._form.querySelector(`#${input.id}-error`);
+    input.classList.add(this._inputErrorClass);
+    error.textContent = input.validationMessage;
+  }
+
+  _checkInputValidity(input) {
     const buttonClose = this._form.querySelector('.popup__close');
 
       if (input.validity.valid) {
-        error.textContent = '';
-        input.classList.remove(this._inputErrorClass);
+        this._removeInputError(input);
       } else {
-        error.textContent = input.validationMessage;
-        input.classList.add(this._inputErrorClass);
+        this._addInputError(input);
       }
 
       buttonClose.addEventListener('click', () => {
@@ -39,28 +47,64 @@ class FormValidator {
   }
 
   enableValidation() {
-    const forms = [...document.querySelectorAll(this._formSelector)];
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+    });
+    this._form.addEventListener('reset', () => {
+      setTimeout(() => {
+        _toggleSubmitButton(this._inputsList, this._submitButton);
+      }, 0);
+    });
 
-    forms.forEach(form => {
-      const inputs = [...form.querySelectorAll(this._inputSelector)];
-      const button = form.querySelector(this._submitButtonSelector);
+    this._inputsList = this._form.querySelectorAll(this._inputSelector);
+    this._submitButton = this._form.querySelector(this._submitButtonSelector);
 
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-      });
-
-      form.addEventListener('reset', () => {
-        setTimeout(() => {
-          _toggleSubmitButton(this._inputs, this._button);
-        }, 0);
-      });
-
-      inputs.forEach(input => {
-        input.addEventListener('input', () => {
-          this._checkInputValidity(input);
-          this._toggleSubmitButton(inputs, button);
-        });
+    this._inputsList.forEach(input => {
+      input.addEventListener('input', () => {
+        this._checkInputValidity(input);
+        this._toggleSubmitButton(this._inputsList, this._submitButton);
       });
     });
   }
+
+  // enableValidation() {
+  //   const forms = [...document.querySelectorAll(this._formSelector)];
+
+  //   forms.forEach(form => {
+  //     const inputs = [...form.querySelectorAll(this._inputSelector)];
+  //     const button = form.querySelector(this._submitButtonSelector);
+
+  //     form.addEventListener('submit', (e) => {
+  //       e.preventDefault();
+  //     });
+
+
+      // this._form.addEventListener('reset', () => {
+      //   setTimeout(() => {
+      //     this._toggleSubmitButton(this._inputs, this._button);
+      //   }, 0);
+      // });
+
+  //     this._inputList.forEach(input => {
+  //       this._inputList = this._form.querySelectorAll(this._inputSelector);
+  //       input.addEventListener('input', () => {
+  //         this._checkInputValidity(input);
+  //         this._toggleSubmitButton(inputs, button);
+  //       });
+  //     })
+
+  //     // form.addEventListener('reset', () => {
+  //     //   setTimeout(() => {
+  //     //     _toggleSubmitButton(this._inputs, this._button);
+  //     //   }, 0);
+  //     // });
+
+  //     // inputs.forEach(input => {
+  //     //   input.addEventListener('input', () => {
+  //     //     this._checkInputValidity(input);
+  //     //     this._toggleSubmitButton(inputs, button);
+  //     //   });
+  //     // });
+  //   });
+  // }
 }
