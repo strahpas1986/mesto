@@ -22,6 +22,7 @@ class FormValidator {
   _removeInputError(input) {
     const error = this._form.querySelector(`#${input.id}-error`);
     input.classList.remove(this._inputErrorClass);
+    error.classList.remove(this._errorClass);
     error.textContent = '';
   }
 
@@ -40,10 +41,13 @@ class FormValidator {
         this._addInputError(input);
       }
 
-      buttonClose.addEventListener('click', () => {
-        input.classList.remove(this._inputErrorClass);
-        error.classList.remove(this._errorClass);
-      });
+      buttonClose.addEventListener('click', resetValidation);
+  }
+
+  resetValidation() {
+    this._inputsList.forEach(input => {
+      this._removeInputError(input);
+    });
   }
 
   enableValidation() {
@@ -67,44 +71,4 @@ class FormValidator {
     });
   }
 
-  // enableValidation() {
-  //   const forms = [...document.querySelectorAll(this._formSelector)];
-
-  //   forms.forEach(form => {
-  //     const inputs = [...form.querySelectorAll(this._inputSelector)];
-  //     const button = form.querySelector(this._submitButtonSelector);
-
-  //     form.addEventListener('submit', (e) => {
-  //       e.preventDefault();
-  //     });
-
-
-      // this._form.addEventListener('reset', () => {
-      //   setTimeout(() => {
-      //     this._toggleSubmitButton(this._inputs, this._button);
-      //   }, 0);
-      // });
-
-  //     this._inputList.forEach(input => {
-  //       this._inputList = this._form.querySelectorAll(this._inputSelector);
-  //       input.addEventListener('input', () => {
-  //         this._checkInputValidity(input);
-  //         this._toggleSubmitButton(inputs, button);
-  //       });
-  //     })
-
-  //     // form.addEventListener('reset', () => {
-  //     //   setTimeout(() => {
-  //     //     _toggleSubmitButton(this._inputs, this._button);
-  //     //   }, 0);
-  //     // });
-
-  //     // inputs.forEach(input => {
-  //     //   input.addEventListener('input', () => {
-  //     //     this._checkInputValidity(input);
-  //     //     this._toggleSubmitButton(inputs, button);
-  //     //   });
-  //     // });
-  //   });
-  // }
 }
