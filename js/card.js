@@ -24,7 +24,6 @@ export class Card {
   // клонирование карточек
 
   generateElement () {
-    // this._element = this._getTemplate();
     this._imageElement.src = this._link;
     this._imageElement.title = this._name;
     this._element.querySelector('.element__subtitle').textContent = this._name;

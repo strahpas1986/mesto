@@ -106,6 +106,7 @@ popupAddCardValidation.enableValidation();
 profileOpenButton.addEventListener('click', () => {
   openPopUp(popupEditProfile);
   fillProfileInputs();
+  popupProfileValidation.resetValidation();
 });
 addOpenButton.addEventListener('click', () => {
   openPopUp(popupAddCard);
