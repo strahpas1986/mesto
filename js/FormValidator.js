@@ -11,10 +11,10 @@ class FormValidator {
   _toggleSubmitButton() {
     const isFormValid = this._inputsList.every(input => input.validity.valid);
     if (isFormValid) {
-      this.submitButton.classList.remove(this._inactiveButtonClass);
-      this.submitButton.disabled = '';
+      this._submitButton.classList.remove(this._inactiveButtonClass);
+      this._submitButton.disabled = '';
     } else {
-      this.submitButton.classList.add(this._inactiveButtonClass);
+      this._submitButton.classList.add(this._inactiveButtonClass);
       this._submitButton.disabled = true;
     }
   }
@@ -49,7 +49,7 @@ class FormValidator {
   enableValidation() {
     this._form.addEventListener('reset', () => {
       setTimeout(() => {
-        _toggleSubmitButton(this._inputsList, this._submitButton);
+        this._toggleSubmitButton(this._inputsList, this._submitButton);
       }, 0);
     });
 
@@ -59,7 +59,7 @@ class FormValidator {
     this._inputsList.forEach(input => {
       input.addEventListener('input', () => {
         this._checkInputValidity(input);
-        this._toggleSubmitButton(this._inputsList, this._submitButton);
+        this._toggleSubmitButton();
       });
     });
   }
