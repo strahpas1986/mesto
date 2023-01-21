@@ -1,5 +1,6 @@
 import { Card } from './card.js';
 import { initialCards, settings } from './constants.js';
+import Section from './components/Section.js';
 
 // Переменные для кнопок открытия попапов
 
@@ -72,11 +73,24 @@ const handleSubmitProfilePopup = (evt) => {
     closePopUp(popupEditProfile);
 }
 
-initialCards.forEach((item) => {
-  const element = new Card(item.name, item.link, '#element-template');
-  const elementContainer = element.generateElement();
-  document.querySelector('.elements').append(elementContainer);
-});
+const elementList = new Section ({
+  items: initialCards,
+  renderer: (item) => {
+    const element = new Card(item.name, item.link, '#element-template');
+    const elementContainer = element.generateElement();
+    elementList.addItem(elementContainer);
+  }
+}, elementContainer);
+
+// initialCards.forEach((item) => {
+
+// })
+
+// initialCards.forEach((item) => {
+//   const element = new Card(item.name, item.link, '#element-template');
+//   const elementContainer = element.generateElement();
+//   document.querySelector('.elements').append(elementContainer);
+// });
 
 // добавить новую карточку
 
@@ -125,6 +139,8 @@ popups.forEach((popup) => {
   }
   popup.addEventListener('mousedown', closePopupIsAll);
 });
+
+elementList.renderItems();
 
 formElement.addEventListener('submit', handleSubmitProfilePopup);
 elementInDisplayAdd.addEventListener('submit', handleAddCard);
