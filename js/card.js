@@ -1,4 +1,6 @@
-import {openPopUp, popupImage} from './index.js';
+import {popupImage} from './index.js';
+import Popup from './components/Popup.js';
+import { PopupWithImage } from './components/PopupWithImage.js';
 
 export class Card {
   constructor(name, link, templateSelector) {
@@ -44,10 +46,9 @@ export class Card {
   }
 
    _openPopupImageFull() {
-      popupImage.querySelector('.popup__subtitle-img').textContent = this._name;
-      popupImage.querySelector('.popup__image').src = this._link;
-      popupImage.querySelector('.popup__image').alt = this._name;
-      openPopUp(popupImage);
+      const openPopupFullImage = new PopupWithImage('.popup_image-visible');
+      openPopupFullImage.open(this._link, this._name);
+      openPopupFullImage.setEventListeners();
   }
 
   _setEventListeners() {

@@ -1,6 +1,10 @@
 import { Card } from './card.js';
 import { initialCards, settings } from './constants.js';
 import Section from './components/Section.js';
+import Popup from './components/Popup.js';
+import { PopupWithForm } from './components/PopupWithForm.js';
+import { PopupWithImage } from './components/PopupWithImage.js';
+import { UserInfo } from './components/UserInfo.js';
 
 // Переменные для кнопок открытия попапов
 
@@ -13,8 +17,8 @@ const popups = document.querySelectorAll('.popup');
 const popupEditProfile = document.querySelector('.popup_profile');
 const popupAddCard = document.querySelector('.popup_add-card');
 export const popupImage = document.querySelector('.popup_image-visible');
-const popupImageFull = popupImage.querySelector('.popup__image');
-const popupSubtitleImage = popupImage.querySelector('.popup__subtitle-img');
+export const popupImageFull = popupImage.querySelector('.popup__image');
+export const popupSubtitleImage = popupImage.querySelector('.popup__subtitle-img');
 
 // Переменные для работы с формой
 
@@ -34,28 +38,22 @@ const elementInputLink = document.querySelector('.popup__input_form_link');
 const elementInDisplayAdd = document.querySelector('#popup__form_add');
 
 
-// Функция открытия
 
-export const openPopUp = (popup) => {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupButtonEsc);
-}
+// Открытие попапа добавления карточки через класс Popup
 
-// Функция закрытия
+const addElementPopup = new Popup('.popup_add-card');
 
-const closePopUp = (popup) => {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupButtonEsc);
-}
+addElementPopup.setEventListeners();
 
-// Функция закрытия попапа по Esc
+const openProfilePopup = new Popup('.popup_profile');
 
-const closePopupButtonEsc = (evt) => {
-  if (evt.key === 'Escape') {
-    const popupOpen = document.querySelector('.popup_opened');
-    closePopUp(popupOpen);
-  }
-}
+openProfilePopup.setEventListeners();
+
+// Реализация PopupWidthForm
+
+
+
+// const UserInfo = new UserInfo({name: '.profile__name', info: '.profile__text'});
 
 // Функция заполнения профиля
 
@@ -70,7 +68,7 @@ const handleSubmitProfilePopup = (evt) => {
     profileName.textContent = nameInput.value;
     profileText.textContent = jobInput.value;
 
-    closePopUp(popupEditProfile);
+    editProfilePopup.close();
 }
 
 const elementList = new Section ({
@@ -81,16 +79,6 @@ const elementList = new Section ({
     elementList.addItem(elementContainer);
   }
 }, elementContainer);
-
-// initialCards.forEach((item) => {
-
-// })
-
-// initialCards.forEach((item) => {
-//   const element = new Card(item.name, item.link, '#element-template');
-//   const elementContainer = element.generateElement();
-//   document.querySelector('.elements').append(elementContainer);
-// });
 
 // добавить новую карточку
 
@@ -104,11 +92,18 @@ const handleAddCard = (evt) => {
   const element = new Card (newElementDisplay.name, newElementDisplay.link, '#element-template');
   const cardElement = element.generateElement();
   elementContainer.prepend(cardElement);
-  closePopUp(popupAddCard);
+  addCardPopup.close();
+
   evt.target.reset();
 }
 
-// валидация через класс
+const addCardPopup = new PopupWithForm('.popup_add-card', handleAddCard);
+addCardPopup.setEventListeners();
+
+const editProfilePopup = new PopupWithForm('.popup_profile', handleSubmitProfilePopup);
+editProfilePopup.setEventListeners();
+
+// валидация форм через класс
 
 const popupProfileValidation = new FormValidator(settings, formEditProfile);
 const popupAddCardValidation = new FormValidator(settings, formAddCard);
@@ -118,29 +113,16 @@ popupAddCardValidation.enableValidation();
 // слушатели событий
 
 profileOpenButton.addEventListener('click', () => {
-  openPopUp(popupEditProfile);
+  openProfilePopup.open();
   fillProfileInputs();
   popupProfileValidation.resetValidation();
 });
 addOpenButton.addEventListener('click', () => {
-  openPopUp(popupAddCard);
+  addElementPopup.open();
 });
 
-// Закрытие попапов
-
-popups.forEach((popup) => {
-  const closePopupIsAll = (evt) => {
-    if (evt.target.classList.contains('popup_opened')) {
-        closePopUp(popup);
-    }
-    if (evt.target.classList.contains('popup__close')) {
-      closePopUp(popup);
-    }
-  }
-  popup.addEventListener('mousedown', closePopupIsAll);
-});
 
 elementList.renderItems();
 
-formElement.addEventListener('submit', handleSubmitProfilePopup);
+// formElement.addEventListener('submit', handleSubmitProfilePopup);
 elementInDisplayAdd.addEventListener('submit', handleAddCard);
