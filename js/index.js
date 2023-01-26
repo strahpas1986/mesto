@@ -51,23 +51,22 @@ openProfilePopup.setEventListeners();
 
 // Реализация PopupWidthForm
 
+const userInfo = new UserInfo({name: '.profile__name', info: '.profile__text'});
 
-
-// const UserInfo = new UserInfo({name: '.profile__name', info: '.profile__text'});
 
 // Функция заполнения профиля
 
-const fillProfileInputs = () => {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileText.textContent;
-}
+// const fillProfileInputs = () => {
+//   nameInput.value = profileName.textContent;
+//   jobInput.value = profileText.textContent;
 
-const handleSubmitProfilePopup = (evt) => {
+
+// }
+
+const handleSubmitProfilePopup = (evt, values) => {
     evt.preventDefault();
 
-    profileName.textContent = nameInput.value;
-    profileText.textContent = jobInput.value;
-
+    userInfo.setUserInfo(values.name, values.info);
     editProfilePopup.close();
 }
 
@@ -103,6 +102,8 @@ addCardPopup.setEventListeners();
 const editProfilePopup = new PopupWithForm('.popup_profile', handleSubmitProfilePopup);
 editProfilePopup.setEventListeners();
 
+
+
 // валидация форм через класс
 
 const popupProfileValidation = new FormValidator(settings, formEditProfile);
@@ -114,7 +115,8 @@ popupAddCardValidation.enableValidation();
 
 profileOpenButton.addEventListener('click', () => {
   openProfilePopup.open();
-  fillProfileInputs();
+  const { name, info } = userInfo.getUserInfo();
+  // fillProfileInputs();
   popupProfileValidation.resetValidation();
 });
 addOpenButton.addEventListener('click', () => {
@@ -124,5 +126,4 @@ addOpenButton.addEventListener('click', () => {
 
 elementList.renderItems();
 
-// formElement.addEventListener('submit', handleSubmitProfilePopup);
 elementInDisplayAdd.addEventListener('submit', handleAddCard);
