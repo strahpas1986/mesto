@@ -3,7 +3,6 @@ import { initialCards, settings } from './constants.js';
 import Section from './components/Section.js';
 import Popup from './components/Popup.js';
 import { PopupWithForm } from './components/PopupWithForm.js';
-import { PopupWithImage } from './components/PopupWithImage.js';
 import { UserInfo } from './components/UserInfo.js';
 
 // Переменные для кнопок открытия попапов
@@ -37,8 +36,6 @@ const elementInputTitle = document.querySelector('.popup__input_form_title');
 const elementInputLink = document.querySelector('.popup__input_form_link');
 const elementInDisplayAdd = document.querySelector('#popup__form_add');
 
-
-
 // Открытие попапа добавления карточки через класс Popup
 
 const addElementPopup = new Popup('.popup_add-card');
@@ -53,16 +50,6 @@ openProfilePopup.setEventListeners();
 
 const userInfo = new UserInfo({name: '.profile__name', info: '.profile__text'});
 
-
-// Функция заполнения профиля
-
-// const fillProfileInputs = () => {
-//   nameInput.value = profileName.textContent;
-//   jobInput.value = profileText.textContent;
-
-
-// }
-
 const handleSubmitProfilePopup = (evt, values) => {
     evt.preventDefault();
 
@@ -73,11 +60,17 @@ const handleSubmitProfilePopup = (evt, values) => {
 const elementList = new Section ({
   items: initialCards,
   renderer: (item) => {
-    const element = new Card(item.name, item.link, '#element-template');
+    const element = new Card(item.name, item.link, '#element-template', handleCardClick);
     const elementContainer = element.generateElement();
     elementList.addItem(elementContainer);
   }
 }, elementContainer);
+
+// функция открытия попапа с картинкой при клике по карточке
+
+const handleCardClick = (name, link) => {
+  addCardPopup.open(name, link);
+}
 
 // добавить новую карточку
 
@@ -88,7 +81,7 @@ const handleAddCard = (evt) => {
     link: elementInputLink.value
   }
 
-  const element = new Card (newElementDisplay.name, newElementDisplay.link, '#element-template');
+  const element = new Card (newElementDisplay.name, newElementDisplay.link, '#element-template', handleCardClick);
   const cardElement = element.generateElement();
   elementContainer.prepend(cardElement);
   addCardPopup.close();
@@ -102,8 +95,6 @@ addCardPopup.setEventListeners();
 const editProfilePopup = new PopupWithForm('.popup_profile', handleSubmitProfilePopup);
 editProfilePopup.setEventListeners();
 
-
-
 // валидация форм через класс
 
 const popupProfileValidation = new FormValidator(settings, formEditProfile);
@@ -114,10 +105,10 @@ popupAddCardValidation.enableValidation();
 // слушатели событий
 
 profileOpenButton.addEventListener('click', () => {
-  openProfilePopup.open();
-  const { name, info } = userInfo.getUserInfo();
-  // fillProfileInputs();
-  popupProfileValidation.resetValidation();
+    const { name, info } = userInfo.getUserInfo();
+    editProfilePopup.open();
+    editProfilePopup.setFormValues({ name, info });
+    popupProfileValidation.resetValidation();
 });
 addOpenButton.addEventListener('click', () => {
   addElementPopup.open();

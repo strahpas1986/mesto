@@ -3,7 +3,7 @@ import Popup from './components/Popup.js';
 import { PopupWithImage } from './components/PopupWithImage.js';
 
 export class Card {
-  constructor(name, link, templateSelector) {
+  constructor(name, link, templateSelector, handleCardClick) {
     this._name = name;
     this._link = link;
     this._templateSelector = templateSelector;
@@ -11,6 +11,7 @@ export class Card {
     this._imageElement = this._element.querySelector('.element__image');
     this._likeElement = this._element.querySelector('.element__like');
     this._elementDelete = this._element.querySelector('.element__delete');
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
