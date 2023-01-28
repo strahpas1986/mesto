@@ -15,8 +15,8 @@ constructor({name, info}) {
 
   // принимает новые данные пользователя и добавляет их на страницу
 
-  setUserInfo(name, info) {
+  setUserInfo(name, job) {
     this._name.textContent = name;
-    this._info.textContent = info;
+    this._info.textContent = job;
   }
 }

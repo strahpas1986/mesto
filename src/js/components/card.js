@@ -1,6 +1,6 @@
-import {popupImage} from './index.js';
-import Popup from './components/Popup.js';
-import { PopupWithImage } from './components/PopupWithImage.js';
+import { popupImage } from '../index.js';
+import Popup from './Popup.js';
+import { PopupWithImage } from './PopupWithImage.js';
 
 export class Card {
   constructor(name, link, templateSelector, handleCardClick) {

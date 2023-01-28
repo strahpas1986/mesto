@@ -1,0 +1,39 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "В проектной работе №4 создан адаптивный сайт с помощью таких технологий как flexbox и CSS Grid Layout подключен файл скриптов для добавления базовой интерактивности на сайт ТЗ: 1. Файловая структура CSS организована по БЭМ Nested. 2. Файл normalize.css подключен в проект посредством директивы @import. 3. Все блоки сверстаны в отдельных ветках git и объединены в ветку main. 4. Адаптация подключена через директиву @media screen. 5. Для корректной работы сайта в репозиторий добавлен файл .nojekill 6. Файл скриптов подключен к странице в конце тега body через тег script. 7. Ссылка на проект: https://strahpas1986.github.io/mesto/",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strahpas1986/mesto.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/strahpas1986/mesto/issues"
+  },
+  "homepage": "https://github.com/strahpas1986/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
+    "autoprefixer": "^10.4.13",
+    "babel-loader": "^9.1.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.3",
+    "cssnano": "^5.1.14",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.2",
+    "postcss-loader": "^7.0.2",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  },
+  "dependencies": {
+    "core-js": "^3.27.2",
+    "lodash": "^4.17.21"
+  }
+}

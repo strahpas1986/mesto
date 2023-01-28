@@ -1,4 +1,6 @@
-import { Card } from './card.js';
+import '../pages/index.css';
+import { FormValidator } from './components/FormValidator.js';
+import { Card } from './components/card.js';
 import { initialCards, settings } from './constants.js';
 import Section from './components/Section.js';
 import Popup from './components/Popup.js';
@@ -53,7 +55,7 @@ const userInfo = new UserInfo({name: '.profile__name', info: '.profile__text'});
 const handleSubmitProfilePopup = (evt, values) => {
     evt.preventDefault();
 
-    userInfo.setUserInfo(values.name, values.info);
+    userInfo.setUserInfo(values.name, values.job);
     editProfilePopup.close();
 }
 
@@ -105,9 +107,9 @@ popupAddCardValidation.enableValidation();
 // слушатели событий
 
 profileOpenButton.addEventListener('click', () => {
-    const { name, info } = userInfo.getUserInfo();
+    const { name, job } = userInfo.getUserInfo();
     editProfilePopup.open();
-    editProfilePopup.setFormValues({ name, info });
+    editProfilePopup.setFormValues({ name, job });
     popupProfileValidation.resetValidation();
 });
 addOpenButton.addEventListener('click', () => {

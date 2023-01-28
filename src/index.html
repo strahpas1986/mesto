@@ -5,20 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto Россия</title>
-    <link rel="stylesheet" href="./pages/index.css">
+    <!-- <link rel="stylesheet" href="./pages/index.css"> -->
 </head>
 
 <body class="page">
   <header class="header">
     <a href="#" class="header__link">
-      <img src="./images/logo.svg" alt="Логотип Mesto" class="header__image">
+      <img src="<%=require('./images/logo.svg')%>" alt="Логотип Mesto" class="header__image">
     </a>
   </header>
 
   <main class="content">
     <section class="profile">
       <div class="profile__container">
-        <img src="./images/Avatar.png" alt="Аватар пользователя" class="profile__avatar">
+        <img src="<%=require('./images/Avatar.png')%>" alt="Аватар пользователя" class="profile__avatar">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="profile__btn-edit" type="button"></button>
@@ -122,8 +122,8 @@
     </article>
   </template>
 
-  <script src="./js/FormValidator.js"></script>
-  <script type="module" src="./js/index.js"></script>
+<!-- <script src="./js/components/FormValidator.js"></script> -->
+<!-- <script type="module" src="./js/index.js"></script> -->
 </body>
 </html>
 
