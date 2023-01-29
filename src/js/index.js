@@ -1,4 +1,15 @@
-// import '../pages/index.css';
+import '../pages/index.css';
+import { profileOpenButton,
+         addOpenButton,
+         popupImage,
+         popupImageFull,
+         popupSubtitleImage,
+         elementContainer,
+         formEditProfile,
+         formAddCard,
+         elementInputTitle,
+         elementInputLink
+       } from './variables.js';
 import { FormValidator } from './components/FormValidator.js';
 import { Card } from './components/card.js';
 import { initialCards, settings } from './constants.js';
@@ -7,44 +18,15 @@ import Popup from './components/Popup.js';
 import { PopupWithForm } from './components/PopupWithForm.js';
 import { UserInfo } from './components/UserInfo.js';
 
-// Переменные для кнопок открытия попапов
-
-const profileOpenButton = document.querySelector('.profile__btn-edit');
-const addOpenButton = document.querySelector('.profile__button');
-
-// Переменные для вызова попапов
-
-const popups = document.querySelectorAll('.popup');
-const popupEditProfile = document.querySelector('.popup_profile');
-const popupAddCard = document.querySelector('.popup_add-card');
-export const popupImage = document.querySelector('.popup_image-visible');
-export const popupImageFull = popupImage.querySelector('.popup__image');
-export const popupSubtitleImage = popupImage.querySelector('.popup__subtitle-img');
-
-// Переменные для работы с формой
-
-const formElement = document.querySelector('.popup__form');
-const nameInput = document.querySelector('.popup__input_form_name');
-const jobInput = document.querySelector('.popup__input_form_job');
-const profileName = document.querySelector('.profile__name');
-const profileText = document.querySelector('.profile__text');
-
-// Переменные для добавление карточек
-
-const elementContainer = document.querySelector('.elements');
-const formEditProfile = document.querySelector('.popup__form_edit-profile');
-const formAddCard = document.querySelector('.popup__form_add-card');
-const elementInputTitle = document.querySelector('.popup__input_form_title');
-const elementInputLink = document.querySelector('.popup__input_form_link');
 
 // Открытие попапа добавления карточки через класс Popup
 
 const addElementPopup = new Popup('.popup_add-card');
-
 addElementPopup.setEventListeners();
 
-const openProfilePopup = new Popup('.popup_profile');
+// Открытие попапа редактирования профиля через класс Popup
 
+const openProfilePopup = new Popup('.popup_profile');
 openProfilePopup.setEventListeners();
 
 // Реализация PopupWidthForm
