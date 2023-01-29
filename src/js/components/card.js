@@ -1,5 +1,5 @@
-import { popupImage } from '../index.js';
-import Popup from './Popup.js';
+// import { popupImage } from '../index.js';
+// import Popup from './Popup.js';
 import { PopupWithImage } from './PopupWithImage.js';
 
 export class Card {

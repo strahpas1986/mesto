@@ -1,4 +1,4 @@
-import '../pages/index.css';
+// import '../pages/index.css';
 import { FormValidator } from './components/FormValidator.js';
 import { Card } from './components/card.js';
 import { initialCards, settings } from './constants.js';
@@ -36,7 +36,6 @@ const formEditProfile = document.querySelector('.popup__form_edit-profile');
 const formAddCard = document.querySelector('.popup__form_add-card');
 const elementInputTitle = document.querySelector('.popup__input_form_title');
 const elementInputLink = document.querySelector('.popup__input_form_link');
-const elementInDisplayAdd = document.querySelector('#popup__form_add');
 
 // Открытие попапа добавления карточки через класс Popup
 
@@ -118,5 +117,3 @@ addOpenButton.addEventListener('click', () => {
 
 
 elementList.renderItems();
-
-elementInDisplayAdd.addEventListener('submit', handleAddCard);
