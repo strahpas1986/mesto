@@ -1,7 +1,7 @@
 export class UserInfo {
-constructor({name, info}) {
+constructor({name, job}) {
     this._name = document.querySelector(name);
-    this._info = document.querySelector(info);
+    this._info = document.querySelector(job);
   }
 
   // возвращает объект с данными пользователя
@@ -9,7 +9,7 @@ constructor({name, info}) {
   getUserInfo() {
     return {
       name: this._name.textContent,
-      info: this._info.textContent
+      job: this._info.textContent
     }
   }
 

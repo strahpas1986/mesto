@@ -49,7 +49,7 @@ openProfilePopup.setEventListeners();
 
 // Реализация PopupWidthForm
 
-const userInfo = new UserInfo({name: '.profile__name', info: '.profile__text'});
+const userInfo = new UserInfo({name: '.profile__name', job: '.profile__text'});
 
 const handleSubmitProfilePopup = (evt, values) => {
     evt.preventDefault();
