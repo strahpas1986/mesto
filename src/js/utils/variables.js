@@ -1,7 +1,7 @@
 // Переменные для кнопок открытия попапов
 
 export const profileOpenButton = document.querySelector('.profile__btn-edit');
-export const addOpenButton = document.querySelector('.profile__button');
+export const buttonOpenAdd = document.querySelector('.profile__button');
 
 // Переменные для вызова попапов
 
