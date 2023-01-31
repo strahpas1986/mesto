@@ -11,12 +11,19 @@ import { profileOpenButton,
          elementInputLink
        } from '../js/utils/variables.js';
 import { FormValidator } from '../js/components/FormValidator.js';
-import { Card } from '../js/components/card.js';
+import { Card } from '../js/components/Card.js';
 import { initialCards, settingsValidation } from '../js/utils/constants.js';
 import Section from '../js/components/Section.js';
-import Popup from '../js/components/Popup.js';
 import { PopupWithForm } from '../js/components/PopupWithForm.js';
+import { PopupWithImage } from '../js/components/PopupWithImage';
 import { UserInfo } from '../js/components/UserInfo.js';
+
+const popupOpenImage = new PopupWithImage('.popup_image-visible');
+popupOpenImage.setEventListeners();
+
+const handleCardClick = (name, link) => {
+  popupOpenImage.open(name, link);
+}
 
 const userInfo = new UserInfo({name: '.profile__name', job: '.profile__text'});
 
@@ -39,12 +46,6 @@ const cardsContainer = new Section ({
         handleReturnCard(item.name, item.link);
   }
 }, elementContainer);
-
-// функция открытия попапа с картинкой при клике по карточке
-
-const handleCardClick = (name, link) => {
-  addCardPopup.open(name, link);
-}
 
 // добавить новую карточку
 
