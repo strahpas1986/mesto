@@ -9,14 +9,14 @@ import { profileOpenButton,
          formAddCard,
          elementInputTitle,
          elementInputLink
-       } from '../js/utils/variables.js';
-import { FormValidator } from '../js/components/FormValidator.js';
-import { Card } from '../js/components/Card.js';
-import { initialCards, settingsValidation } from '../js/utils/constants.js';
-import Section from '../js/components/Section.js';
-import { PopupWithForm } from '../js/components/PopupWithForm.js';
-import { PopupWithImage } from '../js/components/PopupWithImage';
-import { UserInfo } from '../js/components/UserInfo.js';
+       } from '../utils/variables.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { Card } from '../components/Card.js';
+import { initialCards, settingsValidation } from '../utils/constants.js';
+import Section from '../components/Section.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithImage } from '../components/PopupWithImage';
+import { UserInfo } from '../components/UserInfo.js';
 
 const popupOpenImage = new PopupWithImage('.popup_image-visible');
 popupOpenImage.setEventListeners();
@@ -31,19 +31,26 @@ const handleSubmitProfilePopup = (evt, values) => {
     evt.preventDefault();
 
     userInfo.setUserInfo(values.name, values.job);
-    editProfilePopup.close();
+    popupEditProfile.close();
 }
 
-const handleReturnCard = (name, link) => {
+const createCard = (name, link) => {
   const cardItem = new Card(name, link, '#element-template', handleCardClick);
     const cardElement = cardItem.generateElement();
-    cardsContainer.addItem(cardElement);
+
+  return cardElement;
+
+}
+
+const insertCard = (elem) => {
+  cardsContainer.addItem(elem);
 }
 
 const cardsContainer = new Section ({
   items: initialCards,
   renderer: (item) => {
-        handleReturnCard(item.name, item.link);
+        createCard(item.name, item.link);
+        insertCard(createCard(item.name, item.link));
   }
 }, elementContainer);
 
@@ -56,15 +63,16 @@ const handleAddCard = (evt) => {
     link: elementInputLink.value
   }
 
-  handleReturnCard(newElementDisplay.name, newElementDisplay.link);
-  addCardPopup.close();
+
+  insertCard(createCard(newElementDisplay.name, newElementDisplay.link))
+  popupAddCard.close();
 }
 
-const addCardPopup = new PopupWithForm('.popup_add-card', handleAddCard);
-addCardPopup.setEventListeners();
+const popupAddCard = new PopupWithForm('.popup_add-card', handleAddCard);
+popupAddCard.setEventListeners();
 
-const editProfilePopup = new PopupWithForm('.popup_profile', handleSubmitProfilePopup);
-editProfilePopup.setEventListeners();
+const popupEditProfile = new PopupWithForm('.popup_profile', handleSubmitProfilePopup);
+popupEditProfile.setEventListeners();
 
 // валидация форм через класс
 
@@ -77,12 +85,12 @@ popupAddCardValidation.enableValidation();
 
 profileOpenButton.addEventListener('click', () => {
     const { name, job } = userInfo.getUserInfo();
-    editProfilePopup.open();
-    editProfilePopup.setFormValues({ name, job });
+    popupEditProfile.open();
+    popupEditProfile.setFormValues({ name, job });
     popupProfileValidation.resetValidation();
 });
 buttonOpenAdd.addEventListener('click', () => {
-  addCardPopup.open();
+  popupAddCard.open();
 });
 
 cardsContainer.renderItems();
