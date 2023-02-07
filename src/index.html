@@ -17,7 +17,11 @@
   <main class="content">
     <section class="profile">
       <div class="profile__container">
-        <img src="<%=require('./images/Avatar.png')%>" alt="Аватар пользователя" class="profile__avatar">
+        <div class="profile__avatar-container">
+          <img src="<%=require('./images/Avatar.png')%>" alt="Аватар пользователя" class="profile__avatar">
+          <button class="profile__edit-avatar"></button>
+        </div>
+
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="profile__btn-edit" type="button"></button>
@@ -109,6 +113,32 @@
       <p class="popup__subtitle-img"></p>
     </div>
   </div>
+  <div class="popup popup_delete-card">
+    <div class="popup__container popup__container_delete-card">
+      <button class="popup__close popup__close_delete-card" type="button"></button>
+      <h3 class="popup__subtitle popup__subtitle_delete-card">Вы уверены?</h3>
+      <button class="popup__button" type="submit">Да</button>
+    </div>
+  </div>
+  <div class="popup popup_edit-avatar">
+    <div class="popup__container popup__container_edit-avatar">
+      <button class="popup__close popup__close_edit-avatar" type="button"></button>
+      <h3 class="popup__subtitle popup__subtitle_edit-avatar">Обновить аватар</h3>
+      <form action="#" class="popup__form popup__form_edit-avatar" name="form__edit-avatar" id="popup__edit-avatar">
+        <input
+          name="avatar"
+          id="avatar-element"
+          required
+          placeholder="Ссылка на аватар"
+          type="url"
+          class="popup__input popup__input_form_avatar"
+          value=""
+        >
+        <span id="title-element-error" class="popup__error"></span>
+      </form>
+      <button class="popup__button" type="submit">Сохранить</button>
+    </div>
+  </div>
 
   <template id="element-template">
     <article class="element">
@@ -116,8 +146,10 @@
       <div class="element__descr">
         <h2 class="element__subtitle"></h2>
         <button class="element__delete"></button>
-        <button class="element__like" type="button"></button>
-        <p class="element__like-number"></p>
+        <div class="element__like_container">
+          <button class="element__like" type="button"></button>
+          <p class="element__like-number">1</p>
+        </div>
       </div>
     </article>
   </template>

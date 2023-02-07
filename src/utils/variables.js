@@ -8,6 +8,7 @@ export const buttonOpenAdd = document.querySelector('.profile__button');
 export const popupImage = document.querySelector('.popup_image-visible');
 export const popupImageFull = popupImage.querySelector('.popup__image');
 export const popupSubtitleImage = popupImage.querySelector('.popup__subtitle-img');
+export const popupDeleteCard = popupImage.querySelector('.popup_delete-card');
 
 // Переменные для добавление карточек
 

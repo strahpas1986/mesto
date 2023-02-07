@@ -39,6 +39,7 @@ export class Card {
   // функционал удаления карточек
 
   _deleteElement() {
+    // this._popupOpenDeleteCard();
     this._elementDelete.closest('.element').remove();
   }
 
@@ -47,6 +48,7 @@ export class Card {
       this._toggleLike();
     });
     this._elementDelete.addEventListener('click', () => {
+      // this.popupOpenDeleteCard();
       this._deleteElement();
     });
     this._imageElement.addEventListener('click', () => {

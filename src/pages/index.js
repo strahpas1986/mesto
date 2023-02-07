@@ -16,6 +16,7 @@ import { initialCards, settingsValidation } from '../utils/constants.js';
 import Section from '../components/Section.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage';
+import { PopupWithDeleteCard } from '../components/PopupWithDeleteCard';
 import { UserInfo } from '../components/UserInfo.js';
 
 const popupOpenImage = new PopupWithImage('.popup_image-visible');
@@ -63,9 +64,19 @@ const handleAddCard = (evt) => {
     link: elementInputLink.value
   }
 
-
   insertCard(createCard(newElementDisplay.name, newElementDisplay.link))
   popupAddCard.close();
+}
+
+const handleDeleteCard = (evt) => {
+  evt.preventDefault();
+  popupOpenDeleteCard.open();
+}
+
+const handleEditAvatarProfile = (evt) => {
+  evt.preventDefault();
+  console.log('123');
+  popupEditAvatar.open();
 }
 
 const popupAddCard = new PopupWithForm('.popup_add-card', handleAddCard);
@@ -74,6 +85,11 @@ popupAddCard.setEventListeners();
 const popupEditProfile = new PopupWithForm('.popup_profile', handleSubmitProfilePopup);
 popupEditProfile.setEventListeners();
 
+export const popupOpenDeleteCard = new PopupWithDeleteCard('.popup_delete-card', handleDeleteCard);
+popupOpenDeleteCard.setEventListeners();
+
+const popupEditAvatar = new PopupWithForm('.popup_edit-avatar', handleEditAvatarProfile);
+popupEditAvatar.setEventListeners();
 // валидация форм через класс
 
 const popupProfileValidation = new FormValidator(settingsValidation, formEditProfile);
