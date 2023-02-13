@@ -1,7 +1,7 @@
 export class UserInfo {
-constructor({name, job}) {
+constructor({name, about}) {
     this._name = document.querySelector(name);
-    this._info = document.querySelector(job);
+    this._info = document.querySelector(about);
   }
 
   // возвращает объект с данными пользователя
@@ -9,14 +9,14 @@ constructor({name, job}) {
   getUserInfo() {
     return {
       name: this._name.textContent,
-      job: this._info.textContent
+      about: this._info.textContent
     }
   }
 
   // принимает новые данные пользователя и добавляет их на страницу
 
-  setUserInfo(name, job) {
+  setUserInfo(name, about) {
     this._name.textContent = name;
-    this._info.textContent = job;
+    this._info.textContent = about;
   }
 }

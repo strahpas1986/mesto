@@ -1,13 +1,14 @@
 export class Card {
-  constructor(name, link, templateSelector, handleCardClick) {
-    this._name = name;
-    this._link = link;
+  constructor(data, templateSelector, userId, handleCardClick) {
+    this._data = data;
     this._templateSelector = templateSelector;
     this._element = this._getTemplate();
     this._imageElement = this._element.querySelector('.element__image');
     this._likeElement = this._element.querySelector('.element__like');
     this._elementDelete = this._element.querySelector('.element__delete');
+    this._userId = userId;
     this._handleCardClick = handleCardClick;
+
   }
 
   _getTemplate() {
@@ -23,9 +24,9 @@ export class Card {
   // клонирование карточек
 
   generateElement () {
-    this._imageElement.src = this._link;
-    this._imageElement.title = this._name;
-    this._element.querySelector('.element__subtitle').textContent = this._name;
+    this._imageElement.src = this._data.link;
+    this._imageElement.title = this._data.name;
+    this._element.querySelector('.element__subtitle').textContent = this._data.name;
     this._setEventListeners();
     return this._element;
   }
@@ -52,7 +53,7 @@ export class Card {
       this._deleteElement();
     });
     this._imageElement.addEventListener('click', () => {
-      this._handleCardClick(this._name, this._link);
+      this._handleCardClick(this._data.name, this._data.link);
     });
   }
 }
