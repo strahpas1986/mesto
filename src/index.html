@@ -19,7 +19,7 @@
       <div class="profile__container">
         <div class="profile__avatar-container">
           <img src="<%=require('./images/Avatar.png')%>" alt="Аватар пользователя" class="profile__avatar">
-          <button class="profile__edit-avatar"></button>
+          <button class="profile__edit-avatar" type="submit"></button>
         </div>
 
         <div class="profile__info">
@@ -59,7 +59,7 @@
         >
         <span id="name-element-error" class="popup__error"></span>
         <input
-          name="job"
+          name="about"
           id="job-element"
           required
           placeholder="Исследователь океана"
@@ -81,17 +81,17 @@
       <h3 class="popup__subtitle">Новое место</h3>
       <form action="#" class="popup__form popup__form_add-card" name="form__add-card" id="popup__form_add">
         <input
-          name="title"
-          id="title-element"
+          name="name"
+          id="name-element"
           required
           placeholder="Название"
           type="text"
-          class="popup__input popup__input_form_title"
+          class="popup__input popup__input_form_name"
           minlength="1"
           maxlength="30"
           value=""
         >
-        <span id="title-element-error" class="popup__error"></span>
+        <span id="name-element-error" class="popup__error"></span>
         <input
           name="link"
           id="link-element"
@@ -106,6 +106,7 @@
       </form>
     </div>
   </div>
+
   <div class="popup popup_image-visible">
     <div class="popup__container popup__container_img">
       <button class="popup__close popup__close_image-visible" type="button"></button>
@@ -113,13 +114,18 @@
       <p class="popup__subtitle-img"></p>
     </div>
   </div>
+
   <div class="popup popup_delete-card">
     <div class="popup__container popup__container_delete-card">
       <button class="popup__close popup__close_delete-card" type="button"></button>
       <h3 class="popup__subtitle popup__subtitle_delete-card">Вы уверены?</h3>
-      <button class="popup__button" type="submit">Да</button>
+      <form action="#" class="popup__form popup__form_delete-card" name="form__delete-card">
+        <button class="popup__button" type="submit">Да</button>
+      </form>
+
     </div>
   </div>
+
   <div class="popup popup_edit-avatar">
     <div class="popup__container popup__container_edit-avatar">
       <button class="popup__close popup__close_edit-avatar" type="button"></button>
@@ -134,7 +140,7 @@
           class="popup__input popup__input_form_avatar"
           value=""
         >
-        <span id="title-element-error" class="popup__error"></span>
+        <span id="avatar-element-error" class="popup__error"></span>
       </form>
       <button class="popup__button" type="submit">Сохранить</button>
     </div>
@@ -145,7 +151,7 @@
       <img src="#" alt="#" class="element__image">
       <div class="element__descr">
         <h2 class="element__subtitle"></h2>
-        <button class="element__delete"></button>
+        <button class="element__delete" class="submit"></button>
         <div class="element__like_container">
           <button class="element__like" type="button"></button>
           <p class="element__like-number">1</p>

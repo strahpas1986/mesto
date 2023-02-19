@@ -2,6 +2,7 @@
 
 export const profileOpenButton = document.querySelector('.profile__btn-edit');
 export const buttonOpenAdd = document.querySelector('.profile__button');
+export const profileAvatarEdit = document.querySelector('.profile__edit-avatar');
 
 // Переменные для вызова попапов
 
@@ -15,6 +16,7 @@ export const popupDeleteCard = popupImage.querySelector('.popup_delete-card');
 export const elementContainer = document.querySelector('.elements');
 export const formEditProfile = document.querySelector('.popup__form_edit-profile');
 export const formAddCard = document.querySelector('.popup__form_add-card');
+export const formAvatar = document.querySelector('.popup__form_edit-avatar');
 export const elementInputTitle = document.querySelector('.popup__input_form_title');
 export const elementInputLink = document.querySelector('.popup__input_form_link');
 

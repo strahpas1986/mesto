@@ -22,7 +22,7 @@ export class Api {
 
   //Редактирование профиля
 
-  editProfileInfo(name, about) { // метод не работает???
+  editProfileInfo(name, about) {
     return fetch(this._serverUrl + '/users/me', {
       method: "PATCH",
       headers: this._headers,
@@ -36,7 +36,7 @@ export class Api {
   //Добавление новой карточки
 
   addNewCard(name, link) {
-    return fetch(this._serverUrl + '/cards', {
+    return fetch(this._serverUrl + "/cards", {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
@@ -49,6 +49,40 @@ export class Api {
 
   //
 
+  deleteInitialCards(_id) {
+    return fetch(this._serverUrl + '/cards/' + _id, {
+      method: "DELETE",
+      headers: this._headers
+    })
+    .then(this._getResponseData);
+  }
+
+  putLike(_id) {
+    return fetch(this._serverUrl + '/cards/' + _id + '/likes', {
+      method: "PUT",
+      headers: this._headers
+    })
+    .then(this._getResponseData);
+  }
+
+  deleteLike(_id) {
+    return fetch(this._serverUrl + '/cards/' + _id + '/likes', {
+      method: "DELETE",
+      headers: this._headers
+    })
+    .then(this._getResponseData);
+  }
+
+  changeAvatar(avatar) {
+    return fetch(this._serverUrl + '/users/me/avatar', {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: avatar
+      })
+    })
+    .then(this._getResponseData);
+  }
 
   _getResponseData(res) {
     if (res.ok) {

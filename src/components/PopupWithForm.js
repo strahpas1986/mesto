@@ -38,7 +38,7 @@ export class PopupWithForm extends Popup {
       const name = input.name;
 
       if(values[name]) {
-        input.value = values[name]
+        input.value = values[name];
       }
     });
   }
