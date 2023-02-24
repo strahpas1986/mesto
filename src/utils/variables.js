@@ -2,7 +2,7 @@
 
 export const profileOpenButton = document.querySelector('.profile__btn-edit');
 export const buttonOpenAdd = document.querySelector('.profile__button');
-export const profileAvatarEdit = document.querySelector('.profile__edit-avatar');
+export const profileAvatarEdit = document.querySelector('.profile__avatar');
 
 // Переменные для вызова попапов
 

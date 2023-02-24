@@ -23,4 +23,7 @@ constructor({name, about, avatar}) {
     this._avatar.src = avatar;
   }
 
+  setAvatar(avatar) {
+    this._avatar.src = avatar;
+  }
 }

@@ -44,8 +44,6 @@ export class Card {
     this._setEventListeners();
     this.renderLikes();
 
-
-
     if (this._ownerId !== this._userId) {
       this._elementDelete.remove();
     }
@@ -57,6 +55,7 @@ export class Card {
 
   renderLikes() {
     this._elementLikeNumber.textContent = this._likes.length;
+    this.switchLikes();
   }
 
   //
@@ -69,9 +68,9 @@ export class Card {
 
   switchLikes() {
     if (this.defineLikes()) {
-      this._likeElement.classList.add("elements__button-like_active");
+      this._likeElement.classList.add("element__like_active");
     } else {
-      this._likeElement.classList.remove("elements__button-like_active");
+      this._likeElement.classList.remove("element__like_active");
     }
   }
 

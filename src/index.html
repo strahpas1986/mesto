@@ -19,7 +19,6 @@
       <div class="profile__container">
         <div class="profile__avatar-container">
           <img src="<%=require('./images/Avatar.png')%>" alt="Аватар пользователя" class="profile__avatar">
-          <button class="profile__edit-avatar" type="submit"></button>
         </div>
 
         <div class="profile__info">
@@ -133,16 +132,17 @@
       <form action="#" class="popup__form popup__form_edit-avatar" name="form__edit-avatar" id="popup__edit-avatar">
         <input
           name="avatar"
-          id="avatar-element"
+          id="avatar"
           required
           placeholder="Ссылка на аватар"
           type="url"
           class="popup__input popup__input_form_avatar"
           value=""
         >
-        <span id="avatar-element-error" class="popup__error"></span>
+        <span id="avatar-error" class="popup__error"></span>
+        <button class="popup__button" type="submit">Сохранить</button>
       </form>
-      <button class="popup__button" type="submit">Сохранить</button>
+
     </div>
   </div>
 

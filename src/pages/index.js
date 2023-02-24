@@ -37,6 +37,7 @@ api.getUserInfo().then(res => {
   userInfo.setUserInfo(res.name, res.about, res.avatar);
 });
 
+
 api.getInitialCards().then(res => {
   cardsContainer.renderItems(res);
 })
@@ -90,11 +91,7 @@ function createCard(item) {
       }
     }
   );
-    const cardElement = cardItem.generateElement();
-    cardsContainer.addItem(cardElement);
-
-  return cardElement;
-
+  return cardItem.generateElement();
 }
 
 function insertCard(elem) {
@@ -115,23 +112,34 @@ function handleAddCard(evt, {name, link}) {
   api.addNewCard(name, link)
     .then((res) => {
       insertCard(createCard(res));
+      popupAddCard.close();
+    })
+    .catch(err => console.log(`Ошибка.....: ${err}`));
 
-    });
-    popupAddCard.close();
 }
 
 // функция удаления карточки
 
 const handleDeleteCard = (elem) => {
-  console.log(elem);
   api.deleteInitialCards(elem)
     .then((res) => {
       popupOpenDeleteCard.open(res);
       deleteCard();
     })
+    .catch(err => console.log(`Ошибка.....: ${err}`))
 }
 
 // функция изменения аватара
+
+const handleEditAvatarProfile = (evt, { avatar }) => {
+  evt.preventDefault();
+  api.changeAvatar(avatar)
+    .then((res) => {
+      userInfo.setAvatar(res.avatar);
+      popupEditAvatar.close();
+    })
+    .catch(err => console.log(`Ошибка.....: ${err}`))
+}
 
 const popupAddCard = new PopupWithForm('.popup_add-card', handleAddCard);
 popupAddCard.setEventListeners();
@@ -142,28 +150,14 @@ popupEditProfile.setEventListeners();
 const popupOpenDeleteCard = new PopupWithDeleteCard('.popup_delete-card', handleDeleteCard);
 popupOpenDeleteCard.setEventListeners();
 
-const popupEditAvatar = new PopupWithForm('.popup_edit-avatar',
-{
-  handleEditAvatarProfile: (data) => {
-    popupEditAvatar.open();
-    api.changeAvatar(data)
-      .then((data) => {
-        userInfo.setUserInfo(data);
-        popupEditAvatar.close();
-      })
-      .finally(() => {
-        popupEditAvatar.buttonText(false);
-
-      })
-  }
-});
+const popupEditAvatar = new PopupWithForm('.popup_edit-avatar', handleEditAvatarProfile);
 popupEditAvatar.setEventListeners();
 
 // валидация форм через класс
 
 const popupProfileValidation = new FormValidator(settingsValidation, formEditProfile);
 const popupAddCardValidation = new FormValidator(settingsValidation, formAddCard);
-const popupAvatarValidation = new FormValidator(settingsValidation, formAvatar)
+const popupAvatarValidation = new FormValidator(settingsValidation, formAvatar);
 popupProfileValidation.enableValidation();
 popupAddCardValidation.enableValidation();
 popupAvatarValidation.enableValidation();
